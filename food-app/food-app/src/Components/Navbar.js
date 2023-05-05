@@ -13,13 +13,13 @@ export const Navbar = () => {
     </div>
     <div className="flex-grow text-center">
       <Link to="/Items" className="text-gray-300 hover:text-white mx-5 font-bold text-lg">Items</Link>
-      <Link to="/desserts" className="text-gray-300 hover:text-white mx-4 font-bold text-lg">Desserts</Link>
-      <Link to="/drinks" className="text-gray-300 hover:text-white mx-4 font-bold text-lg">Drinks</Link>
     </div>
     <div className="flex items-center">
+      <Link to="/Cart">
       <button className="bg-white text-gray-900 rounded-full py-2 px-4">
         <img src="/cart.svg" alt="" className="h-6" />
       </button>
+      </Link>
     </div>
   </div>
 </nav>
