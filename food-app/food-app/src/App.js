@@ -4,6 +4,7 @@ import Navbar from './Components/Navbar';
 import Items from './Components/Items';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Cart from './Components/Cart';
 
 
 
@@ -14,6 +15,7 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path="/Items" element={<Items />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </BrowserRouter>
   );
