@@ -2,7 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { incrementQuantity, decrementQuantity, clearCart } from "../features/cartSlice";
 import { useDispatch } from "react-redux";
-
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { toast } from "react-toastify";
 
 const Cart = () => {
 
@@ -25,6 +26,13 @@ const increment = (itemId) => {
     (state) => state.cart.cartTotalQuantity
   );
   const cartTotalAmount = useSelector((state) => state.cart.cartTotalAmount);
+
+  const handleOrderApproval = (data, actions) => {
+    toast.success(`order completed`, {
+        position: "bottom-left",
+})
+    empty();
+  };
 
   return (
     <div className="container mx-auto px-4">
@@ -69,17 +77,31 @@ const increment = (itemId) => {
         </tbody>
       </table>
       <div className="flex justify-end mt-4">
-        <button className="bg-blue-500 text-white px-4 py-2 rounded mr-4">
-          Checkout
-        </button>
-        <button className="bg-yellow-500 text-white px-4 py-2 rounded">
-          Paypal Checkout
-        </button>
-        <button className="bg-gray-500 text-white px-4 py-2 rounded ml-4" onClick={empty}>
-          Clear Cart
-        </button>
-      </div>
-    </div>
+      <button className="bg-blue-500 text-white px-4 py-2 rounded mr-4">
+      Checkout
+    </button>
+    <PayPalScriptProvider options={{ "client-id": process.env.REACT_APP_CLIENT_ID }}>
+        <PayPalButtons
+          style={{ layout: "horizontal" }}
+          createOrder={(data, actions) => {
+            return actions.order.create({
+              purchase_units: [
+                {
+                  amount: {
+                    value: cartTotalAmount.toString(),
+                  },
+                },
+              ],
+            });
+          }}
+          onApprove={handleOrderApproval}
+        />
+      </PayPalScriptProvider>
+    <button className="bg-gray-500 text-white px-4 py-2 rounded ml-4" onClick={empty}>
+      Clear Cart
+    </button>
+  </div>
+</div>
   );
 };
 
