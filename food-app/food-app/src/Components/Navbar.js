@@ -7,7 +7,7 @@ export const Navbar = () => {
   <div className="container mx-auto flex justify-between items-center">
     <div className="flex items-center">
       <Link to="/" className="mr-auto">
-        <img src="/doordash.png" alt="DoorDash" className="h-10 w-10" />
+        <img src="/logo.png" alt="DoorDash" className="h-10 w-10" />
       </Link>
     </div>
     <div className="flex-grow text-center">
