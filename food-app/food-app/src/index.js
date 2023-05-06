@@ -8,7 +8,6 @@ import { configureStore } from '@reduxjs/toolkit';
 import cartReducer from './features/cartSlice';
 import { Provider } from 'react-redux';
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const store = configureStore ({
